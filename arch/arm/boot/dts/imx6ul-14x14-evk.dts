@@ -168,6 +168,7 @@
 	};
 };
 
+/*
 &fec1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_enet1>;
@@ -198,6 +199,7 @@
 		};
 	};
 };
+*/
 
 &flexcan1 {
 	pinctrl-names = "default";
@@ -584,6 +586,20 @@
 				MX6UL_PAD_LCD_RESET__WDOG1_WDOG_ANY    0x30b0
 			>;
 		};
+
+		pinctrl_ecspi4_cs: ecspi4_cs_grp {
+			fsl,pins = <
+				MX6UL_PAD_ENET2_RX_ER__GPIO2_IO15	0x10b0
+			>;
+		};
+
+		pinctrl_ecspi4: ecspi4grp {
+			fsl,pins = <
+				MX6UL_PAD_ENET2_TX_EN__ECSPI4_MOSI		0x10b0
+				MX6UL_PAD_ENET2_TX_CLK__ECSPI4_MISO		0x10b0
+				MX6UL_PAD_ENET2_TX_DATA1__ECSPI4_SCLK	0x10b0
+			>;
+		};
 	};
 };
 
@@ -744,4 +760,12 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_wdog>;
 	fsl,wdog_b;
+};
+
+&ecspi4 {
+	fsl,spi-num-chipselects = <1>;
+	cs-gpios = <&gpio2 15 0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi4 &pinctrl_ecspi4_cs>;
+	status = "okay";
 };
