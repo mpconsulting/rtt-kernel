@@ -41,11 +41,12 @@ static int snd_microsemi_dac_init(struct snd_soc_pcm_runtime *rtd)
 static int snd_microsemi_dac_hw_params(struct snd_pcm_substream *substream,
                                              struct snd_pcm_hw_params *params)
 {
-    struct snd_soc_pcm_runtime *rtd = substream->private_data;
-    struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
-    unsigned int sample_bits = snd_pcm_format_physical_width(params_format(params));
+//    struct snd_soc_pcm_runtime *rtd = substream->private_data;
+//    struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
+//    unsigned int sample_bits = snd_pcm_format_physical_width(params_format(params));
 
-    return snd_soc_dai_set_bclk_ratio(cpu_dai, sample_bits * 2);
+    return  0;
+//    return snd_soc_dai_set_bclk_ratio(cpu_dai, sample_bits * 2);
 }
 
 /* machine stream operations */
@@ -66,7 +67,7 @@ static struct snd_soc_dai_link snd_microsemi_dac_dai[] = {
     .platform_name  = "bcm2708-i2s.0",
     .codec_name     = "zl380-codec",
     .dai_fmt        = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
-                        SND_SOC_DAIFMT_CBS_CFS,
+                        SND_SOC_DAIFMT_CBM_CFM,
     .ops            = &snd_microsemi_dac_ops,
     .init           = snd_microsemi_dac_init,
     },
